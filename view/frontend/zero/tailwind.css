@@ -19,8 +19,10 @@
         }
     }
 
+    /* The heading and the buttons share a row and wrap on the narrowest phones (320 px), so the row never widens the page. */
     .zero-brands-carousel-head {
         display: flex;
+        flex-wrap: wrap;
         align-items: flex-end;
         justify-content: space-between;
         gap: 1rem;
@@ -51,6 +53,9 @@
     }
 
     .zero-brands-carousel-all {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.25rem;
         margin-inline-end: 0.5rem;
         font-size: var(--text-2xs);
         font-weight: 600;

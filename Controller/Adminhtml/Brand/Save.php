@@ -63,7 +63,8 @@ class Save extends Action implements HttpPostActionInterface
 
     private function cleanCaches(): void
     {
-        foreach (['full_page', 'block_html', 'eav'] as $type) {
+        // graphql_query_resolver_result: a headless storefront's cached brand answers (Model\Resolver).
+        foreach (['full_page', 'block_html', 'eav', 'graphql_query_resolver_result'] as $type) {
             $this->cacheTypeList->cleanType($type);
         }
     }

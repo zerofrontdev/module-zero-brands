@@ -33,4 +33,16 @@
             </argument>
         </arguments>
     </type>
+    <!-- Global, not frontend: the search box (frontend) and zeroSearchSuggest (GraphQL) share the sources. -->
+    <!-- Zero_Search (when enabled): brands it finds. -->
+    <type name="Zero\Search\Model\Sources">
+        <arguments>
+            <argument name="sources" xsi:type="array">
+                <item name="brands" xsi:type="array">
+                    <item name="source" xsi:type="object">Zero\Brands\Model\Search\BrandSource</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
 </config>

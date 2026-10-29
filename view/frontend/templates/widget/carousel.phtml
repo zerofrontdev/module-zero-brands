@@ -14,7 +14,7 @@ $brands = $block->getBrands();
 if (!$brands) {
     return;
 }
-$uid = 'zero-brands-' . substr(md5($block->getNameInLayout() . $block->getHeading()), 0, 8);
+$uid = 'zero-brands-' . substr(hash('sha256', $block->getNameInLayout() . $block->getHeading()), 0, 8);
 ?>
 <section class="zero-brands-carousel" aria-labelledby="<?= $escaper->escapeHtmlAttr($uid) ?>-title">
     <div class="zero-brands-carousel-inner">
