@@ -14,7 +14,10 @@ use Magento\Framework\Filesystem;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 
 /**
- * A brand's logo upload into pub/media/zero/brand: JPEG, PNG, WebP or SVG.
+ * A brand's logo upload into pub/media/zero/brand: JPEG, PNG or WebP. No SVG
+ * (it can carry <script> that runs on the store's origin from pub/media), as
+ * for banners; the file's content is checked too, not only its extension.
+ * Logos stored before (SVG included) keep showing.
  */
 class Logo
 {
@@ -37,7 +40,8 @@ class Logo
         }
         try {
             $uploader = $this->uploaderFactory->create(['fileId' => $upload]);
-            $uploader->setAllowedExtensions(['jpg', 'jpeg', 'png', 'webp', 'svg']);
+            $uploader->setAllowedExtensions(['jpg', 'jpeg', 'png', 'webp']);
+            $uploader->addValidateCallback('zero_brand_logo', $this, 'validateImage');
             $uploader->setAllowRenameFiles(true);
             $uploader->setFilesDispersion(false);
             $result = $uploader->save($this->filesystem->getDirectoryWrite(DirectoryList::MEDIA)->getAbsolutePath(self::DIR));
@@ -46,5 +50,19 @@ class Logo
         }
 
         return self::DIR . '/' . $result['file'];
+    }
+
+    /**
+     * The uploader's check of the uploaded file. Not the image adapter's
+     * validateUploadFile(): GD can't open WebP there, so it refuses WebP logos.
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function validateImage(string $path): void
+    {
+        $info = is_file($path) ? getimagesize($path) : false;
+        if (!$info || !in_array($info[2], [IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_WEBP], true)) {
+            throw new \InvalidArgumentException('Not a JPEG, PNG or WebP image.');
+        }
     }
 }

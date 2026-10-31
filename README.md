@@ -40,7 +40,8 @@ Part of [`zerofront/zero`](https://zerofront.dev), which installs the Zero theme
 
 Catalog > Brands (resource `Zero_Brands::brands`): every brand with its
 products, page and logo; a brand's form: name (the attribute option's admin
-label), URL key, logo (JPEG, PNG, WebP or SVG, into pub/media/zero/brand),
+label), URL key, logo (JPEG, PNG or WebP, into pub/media/zero/brand; SVG is
+refused because it can carry script, logos stored before keep showing),
 description, meta title and description, featured and its position.
 Deleting a brand deletes the option (its products lose it). A product's
 brand is set on the product, as any attribute.
@@ -65,6 +66,8 @@ Stores > Configuration where it has a setting, or back up first:
 `bin/magento setup:upgrade --safe-mode=1` dumps the data before anything is
 dropped (`--data-restore=1` puts it back). Deleting the module's code instead
 leaves the tables in place.
+
+What changed in each release: [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 

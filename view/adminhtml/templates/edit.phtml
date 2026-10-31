@@ -36,7 +36,7 @@ $logo = $brand ? $admin->logoUrl($brand['logo']) : null;
                     <p><img src="<?= $escaper->escapeUrl($logo) ?>" alt="" style="max-height: 64px; max-width: 200px;"></p>
                     <label><input type="checkbox" name="logo_remove" value="1"> <?= $escaper->escapeHtml(__('Remove the logo')) ?></label>
                 <?php endif; ?>
-                <input type="file" id="brand-logo" name="logo" accept=".jpg,.jpeg,.png,.webp,.svg">
+                <input type="file" id="brand-logo" name="logo" accept=".jpg,.jpeg,.png,.webp">
             </div>
         </div>
         <div class="admin__field">

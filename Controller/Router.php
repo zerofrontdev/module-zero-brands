@@ -56,12 +56,13 @@ class Router implements RouterInterface
             return null;
         }
         try {
-            $brand = $this->brands->byUrlKey($key, $storeId);
+            // One light lookup: a 404 address never builds the whole brand list.
+            $optionId = $this->brands->optionIdByUrlKey($key, $storeId);
         } catch (\Throwable) {
             return null;
         }
 
-        return $brand ? $this->forward($request, $path, 'brand', 'view', $brand['option_id']) : null;
+        return $optionId !== null ? $this->forward($request, $path, 'brand', 'view', $optionId) : null;
     }
 
     private function forward(HttpRequest $request, string $path, string $controller, string $action, ?int $id = null): ActionInterface
