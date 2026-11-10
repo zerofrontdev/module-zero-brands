@@ -2,7 +2,7 @@
     "name": "zerofront/module-zero-brands",
     "description": "Zero for Magento Open Source: shop by brand: a page per brand, an A–Z of brands, the brand on product pages.",
     "type": "magento2-module",
-    "version": "1.3.8",
+    "version": "1.3.9",
     "license": [
         "OSL-3.0",
         "AFL-3.0"
@@ -34,7 +34,7 @@
         "magento/module-store": "*",
         "magento/module-theme": "*",
         "magento/module-widget": "*",
-        "zerofront/module-zero-layered-navigation": "^1.3.8"
+        "zerofront/module-zero-layered-navigation": "^1.3.9"
     },
     "replace": {
         "fixstacks/module-zero-brands": "self.version"
